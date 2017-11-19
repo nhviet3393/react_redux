@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var List = require('./components/List');
 var {Provider} = require('react-redux');
+var store = require('./redux_config');
 // var Provider = require('react-redux').Provider;
 
 ReactDOM.render(
@@ -11,7 +12,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-require('./redux');
 
 /*
 * spread operator ... (to copy)

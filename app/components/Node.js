@@ -1,10 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Node extends React.Component{
 
     removeNote(){
-        var {index, handleRemove} = this.props;
-        handleRemove(index);
+        var {index, dispatch} = this.props;
+        dispatch({type: 'DELETE', index});
     }
 
   render(){
@@ -17,4 +18,4 @@ class Node extends React.Component{
   }
 }
 
-module.exports = Node;
+module.exports = connect()(Node);

@@ -1,27 +1,21 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class NodeForm extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            isAdd: false
-        }
-    }
-
     handleSubmit(e){
         e.preventDefault();
-        this.props.handleAdd(this.refs.txt.value);
-        this.refs.txt.value = '';
-        this.toggleAdd();
+        var {dispatch} = this.props;
+        dispatch({type: 'ADD_NODE', node: this.refs.txt.value});
+        dispatch({type: 'TOGGLE_IS_ADD'});
     }
 
     toggleAdd(){
-        this.state.isAdd = !this.state.isAdd;
-        this.setState(this.state);
+        var {dispatch} = this.props;
+        dispatch({type: 'TOGGLE_IS_ADD'});
     }
   
     render(){
-        if(this.state.isAdd){
+        if(this.props.isAdd){
             return(
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <input type="text" ref="txt" placeholder="Enter your note!" />
@@ -38,4 +32,6 @@ class NodeForm extends React.Component{
     }
 }
 
-module.exports = NodeForm;
+module.exports = connect(function(state){
+    return {isAdd: state.isAdd}
+})(NodeForm);
